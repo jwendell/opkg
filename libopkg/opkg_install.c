@@ -811,6 +811,10 @@ check_data_file_clashes(pkg_t *pkg, pkg_t *old_pkg)
 
 	       owner = file_hash_get_file_owner(filename);
 
+	       /* If there's no owner, just go ahead and overwrite it */
+	       if (!owner)
+	         continue;
+
 	       /* Pre-existing files are OK if owned by the pkg being upgraded. */
 	       if (owner && old_pkg) {
 		    if (strcmp(owner->name, old_pkg->name) == 0) {
